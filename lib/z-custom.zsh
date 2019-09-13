@@ -40,31 +40,37 @@ bindkey " " globalias
 bindkey "^ " magic-space           # control-space to bypass completion
 bindkey -M isearch " " magic-space # normal space during searches
 
-
 #-----------------------------------------------------
 # https://github.com/zsh-users/zsh-autosuggestions
 #
 # change ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE in case the color contrast is bad
 # https://github.com/zsh-users/zsh-autosuggestions/blob/master/src/config.zsh
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-
-
-#-----------------------------------------------------
-# https://github.com/zsh-users/zsh-completions
-#
-# fpath=(${ZSHCONFIG}/zsh-completions/src $fpath)
-#autoload -U compinit && compinit
-# Performance
-# https://gist.github.com/ctechols/ca1035271ad134841284
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 #-----------------------------------------------------
 # https://github.com/junegunn/fzf#fuzzy-completion-for-bash-and-zsh
 #
-# brew install fzf
-#
 test -d ${ZDOTDIR:-$HOME}/.fzf && source ${ZDOTDIR:-$HOME}/.fzf.zsh
 
-#-----------------------------------------------------
-# https://github.com/nvbn/thefuck
-# brew install thefuck
-# eval $(thefuck --alias)
+[ -f /usr/local/etc/profile.d/z.sh ] && source /usr/local/etc/profile.d/z.sh
+
+##### nvm (node version manager) #####
+# placeholder nvm shell function
+# On first use, it will set nvm up properly which will replace the `nvm`
+# shell function with the real one
+function nvm() {
+  if [[ -d '/usr/local/opt/nvm' ]]; then
+    NVM_DIR="/usr/local/opt/nvm"
+    export NVM_DIR
+    # shellcheck disable=SC1090
+    source "${NVM_DIR}/nvm.sh"
+    if [[ -e ~/.nvm/alias/default ]]; then
+      PATH="${PATH}:${HOME}.nvm/versions/node/$(cat ~/.nvm/alias/default)/bin"
+    fi
+    # invoke the real nvm function now
+    nvm "$@"
+  else
+    echo "nvm is not installed" >&2
+    return 1
+  fi
+}
