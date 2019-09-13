@@ -4,7 +4,7 @@
 
 if [[ "x$SYSTEM" = "xDarwin"  ]]; then
     # system executables
-    #export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/libexec
+    # export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/libexec
     # local system binaries
     export PATH=/usr/local/sbin:/usr/local/bin:$PATH
 fi
@@ -13,17 +13,6 @@ fi
 # ensure to only execute on ZSH
 # https://stackoverflow.com/a/9911082/339302
 [ ! -n "$ZSH_VERSION" ] && return
-
-#-----------------------------------------------------
-#
-# Antibody: Load the plugins before scripts
-#
-#source ${ZSHCONFIG}/antibody-init.zsh
-#
-#
-#source ${ZSHCONFIG}/zsh-managed-plugins.zsh
-#
-#-----------------------------------------------------
 
 #-----------------------------------------------------
 # bootstrap the zplugin script
@@ -35,7 +24,7 @@ source "$HOME/.zsh-config/zplugin-init.zsh"
 #-----------------------------------------------------
 
 # https://github.com/sindresorhus/pure#options
-export PURE_PROMPT_SYMBOL='λ'
+export PURE_PROMPT_SYMBOL='❯'
 
 #-----------------------------------------------------
 # Setting autoloaded functions
@@ -67,11 +56,11 @@ unset my_zsh_lib
 #-----------------------------------------------------
 # Development stuffs
 #
-dev_config_init=${SCRIPTS}/dev-config/_init.sh
-
-[[ -f "$dev_config_init"  ]] && source "$dev_config_init"
-
-unset dev_config_init
+# dev_config_init=${SCRIPTS}/dev-config/_init.sh
+# 
+# [[ -f "$dev_config_init"  ]] && source "$dev_config_init"
+# 
+# unset dev_config_init
 
 #-----------------------------------------------------
 # after all, set the PATH for macOS
