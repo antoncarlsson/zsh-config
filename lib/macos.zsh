@@ -8,21 +8,35 @@
 # GNU ls aliases
 #
 # For macOS where GNU ls is installed via homebrew as `gls`
-case $SYSTEM in
-  Darwin)
-    alias ls='/usr/local/bin/gls --color=auto'
-  ;;
-  Linux)
-    alias ls='ls --color=auto'
-  ;;
-esac
+# case $SYSTEM in
+#   Darwin)
+#     alias ls='/usr/local/bin/gls --color=auto'
+#   ;;
+#   Linux)
+#     alias ls='ls --color=auto'
+#   ;;
+# esac
 #
-alias ll='ls -lFh'     			# long (-l), types classify (-F),human readable (-h)
-alias l='ll'
-alias ls.all='ls -lAFh' 		# long list, show almost all
+
+# fzf
+alias f=fzf
+
+alias ls='ls --color=auto'
+# Use exa instead of ls
+alias ls=exa
+
+alias l='ls -lFh'     #size,show type,human readable
+alias la='ls -laFh'   #long list,show almost all,show type,human readable
+alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
+alias lt='ls -lFht created'   #long list,sorted by date,show type,human readable
+alias ll='ls -l'      #long list
+alias ldot='ls -ld .*'
+alias lS='ls -1FSsh'
+alias lart='ls -1Fcart'
+alias lrt='ls -1Fcrt'
+
 alias ls.sort.time='ls -tlFh'
 alias ls.sort.size='ls -SlFh'
-alias ls.dot='ls -ld .*'		# show dot files, list dirs non-recursively (-d)
 alias ls.recursive='ls -R'
 alias ls.id='ls -nFh'			# show numeric FID and GID (-n)
 
@@ -39,8 +53,10 @@ alias df='df -h'
 #
 # Pipe Aliases
 #
-alias grep='egrep --color=auto '
-alias egrep='egrep --color=auto '
+# Use ripgrep instead of grep
+alias grep='rg --color=auto '
+alias egrep='rg --color=auto '
+
 alias L=' | less '
 alias G=' | egrep --color=auto '
 alias T=' | tail '
@@ -122,3 +138,31 @@ alias sys.pkg.list='pkgutil --pkgs'
 # show CPU info
 alias sys.cpu='sysctl -n machdep.cpu.brand_string'
 
+alias dud='du -d 1 -h'
+alias duf='du -sh *'
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# git
+alias g='git'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit -v'
+alias gcmsg='git commit -m'
+alias gco='git checkout'
+alias gd='git diff'
+alias gf='git fetch'
+alias gfo='git fetch origin'
+alias gl='git pull'
+alias gm='git merge'
+alias gmom='git merge origin/master'
+alias gp='git push'
+alias gpd='git push --dry-run'
+alias gst='git status'
+
+alias ccat='highlight -O ansi'
+alias c='pygmentize -O ansi -g'
